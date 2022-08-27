@@ -1,0 +1,2 @@
+export const FORM_MODULE = "FORM_MODULE"
+export const TABLE_MODULE = "TABLE_MODULE"
