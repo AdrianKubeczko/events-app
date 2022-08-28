@@ -1,3 +1,4 @@
+import React from "react";
 import modulesMap from "../../util/modulesMap.js";
 import moduleDescriptions from "../../descriptions/modules/index.js";
 

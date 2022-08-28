@@ -1,5 +1,5 @@
-import pluck from "ramda/src/pluck";
-import prop from "ramda/src/prop";
+import React from 'react'
+import * as R from "ramda";
 import { useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,11 +27,11 @@ const TableComponent = ({ columns, tableActions, getDataFn }) => {
         </thead>
         <tbody>
           {tableValues.map((row) => {
-            const columnIds = pluck("id", columns);
+            const columnIds = R.pluck("id", columns);
             return (
               <tr key={row.id}>
                 {columnIds.map((id) => (
-                  <td key={`${row.id}-${id}`}>{prop(id, row)}</td>
+                  <td key={`${row.id}-${id}`}>{R.prop(id, row)}</td>
                 ))}
                 {tableActions.map((action) => {
                   const ActionRender = action.render;

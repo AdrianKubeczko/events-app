@@ -1,10 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import formReducer from "./Form.js";
 import tableReducer from "./Table.js";
 
-export default configureStore({
-  reducer: {
-    form: formReducer,
-    table: tableReducer,
-  },
+const rootReducer = combineReducers({
+  form: formReducer,
+  table: tableReducer,
 });
+
+export const setupStore = (preloadedState) =>
+  configureStore({
+    reducer: rootReducer,
+    preloadedState,
+  });

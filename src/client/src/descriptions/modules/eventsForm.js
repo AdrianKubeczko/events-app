@@ -26,7 +26,7 @@ export default {
         placeholder: "Email",
         type: "email",
         errorMessages: {
-          pattern: "Provaid a valid email.",
+          pattern: "Provide a valid email",
         },
         
       },

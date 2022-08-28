@@ -5,7 +5,7 @@ export const Table = createSlice({
   initialState: { tableData: [] },
   reducers: {
     clearTableData: (state) => {
-      state.inputValues = [];
+      state.tableData = [];
     },
     setTableData: (state, action) => {
       state.tableData = [...action.payload];
@@ -14,11 +14,14 @@ export const Table = createSlice({
       state.tableData = [...state.tableData, ...action.payload];
     },
     deleteTableRow: (state, action) => {
-        state.tableData = [...state.tableData.filter(record => record.id !== action.payload)];
-      },
+      state.tableData = [
+        ...state.tableData.filter((record) => record.id !== action.payload),
+      ];
+    },
   },
 });
 
-export const { setTableData, clearTableData, updateTableData, deleteTableRow } = Table.actions;
+export const { setTableData, clearTableData, updateTableData, deleteTableRow } =
+  Table.actions;
 
 export default Table.reducer;

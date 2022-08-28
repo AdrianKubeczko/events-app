@@ -1,4 +1,5 @@
-import has from "ramda/src/has";
+import React from "react";
+import * as R from "ramda";
 import { Button, Form } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { setInput } from "../store/Form.js";
@@ -12,11 +13,12 @@ const FormComponent = ({ fields, submits }) => {
     <div className="d-flex flex-column align-items-center mt-5">
       <Form className="w-25">
         {fields.map((field) => {
-          const hasFieldError = has(field.id, formErrors);
+          const hasFieldError = R.has(field.id, formErrors);
           return (
             <Form.Group key={field.id} className="mb-3 invalid">
-              <Form.Label>{field.label}</Form.Label>
+              <Form.Label htmlFor={field.id}>{field.label}</Form.Label>
               <Form.Control
+                id={field.id}
                 required
                 type={field.type || "text"}
                 placeholder={field.placeholder}

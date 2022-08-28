@@ -1,33 +1,32 @@
-import path from "ramda/src/path";
-import find from "ramda/src/find";
-import equals from "ramda/src/equals";
-import pipe from "ramda/src/pipe";
-import prop from "ramda/src/prop";
-import split from "ramda/src/split";
+import * as R from "ramda";
 import moduleDescriptions from "../descriptions/modules/index.js";
 import { setFormError } from "../store/Form.js";
 
 const keywordActionMap = {
   required: (error, fieldDescriptions, dispatch) => {
-    const fieldId = path(["params", "missingProperty"], error);
-    const fieldLabel = pipe(
-      find((field) => equals(field.id, fieldId)),
-      prop("label")
+    const fieldId = R.path(["params", "missingProperty"], error);
+    const fieldLabel = R.pipe(
+      R.find((field) => R.equals(field.id, fieldId)),
+      R.prop("label")
     )(fieldDescriptions);
     dispatch(setFormError({ [fieldId]: `${fieldLabel} is required` }));
   },
   pattern: (error, fieldDescriptions, dispatch) => {
-    const fieldId = pipe(prop("schemaPath"), split("/"), prop([2]))(error);
-    const fieldError = pipe(
-      find((field) => equals(field.id, fieldId)),
-      path(["errorMessages", "pattern"])
+    const fieldId = R.pipe(
+      R.prop("schemaPath"),
+      R.split("/"),
+      R.prop([2])
+    )(error);
+    const fieldError = R.pipe(
+      R.find((field) => R.equals(field.id, fieldId)),
+      R.path(["errorMessages", "pattern"])
     )(fieldDescriptions);
     dispatch(setFormError({ [fieldId]: fieldError }));
   },
 };
 
 export default (errors, moduleId, dispatch) => {
-  const fieldDescriptions = path([moduleId, "fields"], moduleDescriptions);
+  const fieldDescriptions = R.path([moduleId, "fields"], moduleDescriptions);
   errors.map((error) => {
     const { keyword } = error;
     if (keywordActionMap[keyword]) {

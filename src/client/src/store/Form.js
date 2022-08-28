@@ -1,8 +1,4 @@
-import values from "ramda/src/values";
-import keys from "ramda/src/keys";
-import pipe from "ramda/src/pipe";
-import head from "ramda/src/head";
-import omit from "ramda/src/omit";
+import * as R from "ramda";
 import { createSlice } from "@reduxjs/toolkit";
 
 export const Form = createSlice({
@@ -10,13 +6,13 @@ export const Form = createSlice({
   initialState: { inputValues: {}, formErrors: {} },
   reducers: {
     setInput: (state, action) => {
-      const inputValue = pipe(values, head)(action.payload);
-      const inputId = pipe(keys, head)(action.payload);
+      const inputValue = R.pipe(R.values, R.head)(action.payload);
+      const inputId = R.pipe(R.keys, R.head)(action.payload);
       if (!inputValue) {
-        state.inputValues = { ...omit([inputId], state.inputValues) };
+        state.inputValues = { ...R.omit([inputId], state.inputValues) };
       } else {
         state.inputValues = { ...state.inputValues, ...action.payload };
-        state.formErrors = { ...omit([inputId], state.formErrors) };
+        state.formErrors = { ...R.omit([inputId], state.formErrors) };
       }
     },
     setFormError: (state, action) => {
