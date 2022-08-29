@@ -5,7 +5,7 @@ import {
   databaseName,
   dbHost,
   dbPort,
-} from "./constants/events-db.js";
+} from "../../constants/events-db.js";
 
 const { Client, Pool } = pg;
 

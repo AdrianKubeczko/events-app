@@ -1,4 +1,4 @@
-import { client, pool } from "../server/db.js";
+import { client, pool } from "../server/DB/eventsDB/dbConnection.js";
 import { tableName, databaseName } from "../server/constants/events-db.js";
 
 await client.connect();

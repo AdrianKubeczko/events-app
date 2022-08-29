@@ -1,9 +1,5 @@
-import events from "./events.js";
-
-const apis = [events];
-
-export default (app) =>
-  apis.map((api) => {
+export default (app, apiMapping) =>
+apiMapping.map((api) => {
     const { tablePath, tableMethods, rowPath, rowMethods } = api;
     const tableMethodKeys = Object.keys(tableMethods);
     const rowMethodKeys = Object.keys(rowMethods);

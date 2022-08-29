@@ -1,13 +1,15 @@
 import express from "express";
 import cors from "cors";
-import apis from "./api/index.js"
+import apis from "./api/index.js";
 
-const app = express();
+export default (apiMapping) => {
+  const app = express();
 
-// middleware
-app.use(cors());
-app.use(express.json());
+  // middleware
+  app.use(cors());
+  app.use(express.json());
 
-apis(app)
+  apis(app, apiMapping);
 
-export default app
+  return app;
+};
