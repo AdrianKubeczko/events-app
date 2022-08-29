@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as R from "ramda";
 import { Button, Form } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { setInput } from "../store/Form.js";
+import { setInput, clearForm } from "../store/Form.js";
 
 const FormComponent = ({ fields, submits }) => {
   const dispatch = useDispatch();
   const formValues = useSelector((state) => state.form.inputValues);
   const formErrors = useSelector((state) => state.form.formErrors);
+
+  useEffect(() => {
+    dispatch(clearForm());
+  }, [])
 
   return (
     <div className="d-flex flex-column align-items-center mt-5">

@@ -1,16 +1,18 @@
-import React from 'react'
+import React from "react";
 import * as R from "ramda";
 import { useEffect } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
+import { clearTableData } from "../store/Table.js";
 
 const TableComponent = ({ columns, tableActions, getDataFn }) => {
   const dispatch = useDispatch();
   const tableValues = useSelector((state) => state.table.tableData);
 
   useEffect(() => {
+    dispatch(clearTableData());
     getDataFn(dispatch);
-  }, []);
+  }, [dispatch, getDataFn]);
 
   return (
     <div className="d-flex flex-column align-items-center mt-5">
@@ -34,7 +36,6 @@ const TableComponent = ({ columns, tableActions, getDataFn }) => {
                   <td key={`${row.id}-${id}`}>{R.prop(id, row)}</td>
                 ))}
                 {tableActions.map((action) => {
-                  const ActionRender = action.render;
                   return (
                     <td key={action.id}>
                       <Button
